@@ -9,3 +9,9 @@
 
 **Why** is this project of interest to you:
 - I love flowers but have no idea how to arrange flowers. Since  flowers require water to keep them fresh, it is hard to get practice for arranging flowers without having a lot of them being dried up when I am done practicing. Having this application provides a mean of visualization for the flower bouquet I am trying to arrange while I can put all my effort in focusing the techniques for flower arranging.  
+
+## User stories
+- As a user, I want to be able to *add* a flower to my bouquet.
+- As a user, I want to be able to *view* the list of requirements for my bouquet.
+- As a user, I want to be able to *remove* a flower from my bouquet.
+- As a user, I want to be able to *select* from popular bouquets and *add* a greenery for the bouquet of choice.
