@@ -1,6 +1,6 @@
 package model;
 
-public class Sample {
+public class Bouquet {
     int other;
 
     public Sample() {
