@@ -9,7 +9,6 @@ public class BouquetCustomizationApp {
     private Scanner scanner;
     private Bouquet bouquet = new Bouquet(null, 0);
 
-
     // EFFECTS: runs the customization application
     public BouquetCustomizationApp() {
         runCustomization();
@@ -17,7 +16,7 @@ public class BouquetCustomizationApp {
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    // code source from TellerApp 
+    // code source from TellerApp
     private void runCustomization() {
         boolean runCus = true;
         String input = null;
@@ -25,7 +24,7 @@ public class BouquetCustomizationApp {
         scanner = new Scanner(System.in);
 
         while (runCus) {
-            displayMenu(); 
+            displayMenu();
             input = scanner.next();
             input = input.toLowerCase();
 
@@ -43,7 +42,7 @@ public class BouquetCustomizationApp {
             } else {
                 System.out.println("Selection invalid");
             }
-        }    
+        }
         System.out.println("Goodbye");
 
     }
@@ -68,10 +67,18 @@ public class BouquetCustomizationApp {
 
     // MODIFIES: this
     // EFFECTS: instructs user to type in a flower name to remove from the bouquet
+    // and checks if flower is in list of requirements
+    // if it is, it will call for a method to remove the flower
+    // otherwise print a statement telling user that flower is not in bouquet
     private void removeFlower() {
         System.out.println("Enter a flower to remove from the bouquet: ");
         String flowerInput = scanner.next();
         bouquet.flowerRemove(flowerInput);
+        if (bouquet.bouquetRequirements().contains(flowerInput)) {
+            bouquet.flowerRemove(flowerInput);
+        } else {
+            System.out.println("Flower not in bouquet");
+        }
     }
 
     // MODIFIES: this
