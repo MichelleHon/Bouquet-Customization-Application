@@ -31,11 +31,8 @@ public class Bouquet {
     // MOFIDIES: this
     // EFFECTS: removes a flower from the collection of requirements for the bouquet
     public void flowerRemove(String flower) {
-        if (flowerNames.contains(flower)) {
-            flowerNames.remove(flower);
-        } else {
-            System.out.println("Flower not in bouquet"); //check if i cant add these
-        }
+        flowerNames.remove(flower);
+        
     }
 
     // EFFECTS: returns the list of requirements 
