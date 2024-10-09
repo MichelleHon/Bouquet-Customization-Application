@@ -14,24 +14,23 @@ public class Bouquet {
         this.price = bouquetPrice;
     }
 
-    public String getName(){
+    public String getName() {
         return name; 
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return price; 
     }
 
     // MODIFIES: this
     // EFFECTS: adds a flower to the collection of requirements for the bouquet
-    public void aFlower(String flower){
+    public void flowerAdd(String flower) {
         flowerNames.add(flower);
     }
 
     // MOFIDIES: this
-    // EFFECTS: removes a flower from the collection of requirements 
-    // for the bouquet
-    public void rFlower(String flower){
+    // EFFECTS: removes a flower from the collection of requirements for the bouquet
+    public void flowerRemove(String flower) {
         if (flowerNames.contains(flower)) {
             flowerNames.remove(flower);
         } else {
@@ -49,7 +48,7 @@ public class Bouquet {
     // MODIFIES: this
     // EFFECTS: add all flowers for popular bouquet 1
     public void popularBouquetOne() {
-        for(int i = 0; i < 12; i++) {
+        for (int i = 0; i < 12; i++) {
             flowerNames.add("Rose");
         }
         flowerNames.add("Greens");
@@ -58,7 +57,7 @@ public class Bouquet {
     // MODIFIES: this
     // EFFECTS: add all flowers for popular bouquet 2
     public void popularBouquetTwo() {
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             flowerNames.add("Sunflower");
             flowerNames.add("Daisy");
             flowerNames.add("Lily");
@@ -73,7 +72,7 @@ public class Bouquet {
     // MODIFIES: this
     // EFFECTS: add all flowers for popular bouquet 3
     public void popularBouquetThree() {
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             flowerNames.add("Tulip");
             flowerNames.add("Lavender");
             flowerNames.add("Lilac");

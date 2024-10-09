@@ -3,7 +3,6 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,7 @@ public class TestBouquet {
 
     @Test
     void testAddSingleFlower() {
-        testBouquet.aFlower("Rose");
+        testBouquet.flowerAdd("Rose");
         ArrayList<String> flowerName = testBouquet.bouquetRequirements();
         assertEquals("Rose", flowerName.get(0));
         assertEquals(1, flowerName.size());
@@ -33,8 +32,8 @@ public class TestBouquet {
 
     @Test
     void testAddMutipleFlowers() {
-        testBouquet.aFlower("Sunflower");
-        testBouquet.aFlower("Wisteria");
+        testBouquet.flowerAdd("Sunflower");
+        testBouquet.flowerAdd("Wisteria");
         ArrayList<String> flowerName = testBouquet.bouquetRequirements();
         assertEquals("Sunflower", flowerName.get(0));
         assertEquals("Wisteria", flowerName.get(1));
@@ -49,42 +48,42 @@ public class TestBouquet {
 
     @Test
     void testRemoveOneFlower() {
-        testBouquet.aFlower("Tulip");
+        testBouquet.flowerAdd("Tulip");
         ArrayList<String> flowerName = testBouquet.bouquetRequirements();
         assertEquals("Tulip", flowerName.get(0));
         assertEquals(1, flowerName.size());
-        testBouquet.rFlower("Tulip");
+        testBouquet.flowerRemove("Tulip");
         assertEquals(0, flowerName.size());
     }
 
     @Test
     void testRemoveMultipleFlowers() {
-        testBouquet.aFlower("Daisy");
-        testBouquet.aFlower("Lavender");
-        testBouquet.aFlower("Lilac");
+        testBouquet.flowerAdd("Daisy");
+        testBouquet.flowerAdd("Lavender");
+        testBouquet.flowerAdd("Lilac");
         ArrayList<String> flowerName = testBouquet.bouquetRequirements();
         assertEquals("Daisy", flowerName.get(0));
         assertEquals("Lavender", flowerName.get(1));
         assertEquals("Lilac", flowerName.get(2));
         assertEquals(3, flowerName.size());
-        testBouquet.rFlower("Lavender");
+        testBouquet.flowerRemove("Lavender");
         assertEquals("Daisy", flowerName.get(0));
         assertEquals("Lilac", flowerName.get(1));
         assertEquals(2, flowerName.size());
-        testBouquet.rFlower("Daisy");
+        testBouquet.flowerRemove("Daisy");
         assertEquals("Lilac", flowerName.get(0));
         assertEquals(1, flowerName.size());
     }
 
     @Test
     void testRemoveNonexistentFlower() {
-        testBouquet.aFlower("Lily");
-        testBouquet.aFlower("Snowdrop");
+        testBouquet.flowerAdd("Lily");
+        testBouquet.flowerAdd("Snowdrop");
         ArrayList<String> flowerName = testBouquet.bouquetRequirements();
         assertEquals("Lily", flowerName.get(0));
         assertEquals("Snowdrop", flowerName.get(1));
         assertEquals(2, flowerName.size());
-        testBouquet.rFlower("Rose");
+        testBouquet.flowerRemove("Rose");
         assertEquals("Lily", flowerName.get(0));
         assertEquals("Snowdrop", flowerName.get(1));
         assertEquals(2, flowerName.size());

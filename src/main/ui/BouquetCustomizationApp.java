@@ -11,19 +11,20 @@ public class BouquetCustomizationApp {
 
 
     // EFFECTS: runs the customization application
-    public BouquetCustomizationApp(){
+    public BouquetCustomizationApp() {
         runCustomization();
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    private void runCustomization(){
+    // code source from TellerApp 
+    private void runCustomization() {
         boolean runCus = true;
         String input = null;
 
         scanner = new Scanner(System.in);
 
-        while(runCus) {
+        while (runCus) {
             displayMenu(); 
             input = scanner.next();
             input = input.toLowerCase();
@@ -43,12 +44,12 @@ public class BouquetCustomizationApp {
                 System.out.println("Selection invalid");
             }
         }    
-        System.out.println("\nGoodbye");
+        System.out.println("Goodbye");
 
     }
 
     // EFFECTS: displays menu of options to user
-    private void displayMenu(){
+    private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\ta -> add flower");
         System.out.println("\tr -> remove flower");
@@ -62,8 +63,7 @@ public class BouquetCustomizationApp {
     private void addFlower() {
         System.out.println("Enter a flower to add to the bouquet: ");
         String flowerInput = scanner.next();
-        flowerInput = flowerInput.toLowerCase();
-        bouquet.aFlower(flowerInput);
+        bouquet.flowerAdd(flowerInput);
     }
 
     // MODIFIES: this
@@ -71,8 +71,7 @@ public class BouquetCustomizationApp {
     private void removeFlower() {
         System.out.println("Enter a flower to remove from the bouquet: ");
         String flowerInput = scanner.next();
-        flowerInput = flowerInput.toLowerCase();
-        bouquet.rFlower(flowerInput);
+        bouquet.flowerRemove(flowerInput);
     }
 
     // MODIFIES: this
@@ -81,7 +80,6 @@ public class BouquetCustomizationApp {
         popBouquetMenu();
 
         String popInput = scanner.next();
-        //popInput = popInput.toLowerCase();
 
         if (popInput.equals("1")) {
             bouquet.popularBouquetOne();
@@ -95,7 +93,7 @@ public class BouquetCustomizationApp {
     }
 
     // EFFECTS: displays menu of popular bouquet options to user
-    private void popBouquetMenu(){
+    private void popBouquetMenu() {
         System.out.println("Here are our top 3 bouquets");
         System.out.println("You may choose them as a base and customize further");
         System.out.println("\t1: Classic Garden Rose($80)");
