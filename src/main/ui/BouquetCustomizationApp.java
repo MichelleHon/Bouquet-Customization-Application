@@ -7,41 +7,40 @@ public class BouquetCustomizationApp {
 
     // EFFECTS: runs the customization application
     public BouquetCustomizationApp(){
-        //stub
+        // stub
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runCustomization(){
-        //stub
+        // stub
     }
 
     // EFFECTS: displays menu of options to user
     private void displayMenu(){
-        //stub
-    }
-
-    // MOFIDIES: this
-    // EFFECTS: adds a flower to the collection of requirements 
-    // for the bouquet
-    private void addFlower(String flowerName){
-        //stub
-    }
-
-    // MOFIDIES: this
-    // EFFECTS: removes a flower from the collection of requirements 
-    // for the bouquet
-    private void removeFlower(String flowerName){
-        //stub
+        // stub
     }
 
     // MODIFIES: this
-    // EFFECTS: returns the list of requirements 
-    // the user has inputted for the bouquet, 
-    // the list returned could be empty (it is never null)
-    public List<String> bouquetRequirements() {
-        return null;  // stub
+    // EFFECTS: instructs user to type in a flower name to add to the bouquet
+    private void addFlower() {
+        // stub
     }
 
-    //not sure how popular bouquet will work
+    // MODIFIES: this
+    // EFFECTS: instructs user to type in a flower name to remove from the bouquet
+    private void removeFlower() {
+        // stub
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user input regarding popular bouquet
+    private void popularBouquets() {
+        // stub
+    }
+
+    // EFFECTS: displays menu of popular bouquet options to user
+    private void popBouquetMenu(){
+        // stub
+    }
 }
