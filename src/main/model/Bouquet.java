@@ -50,6 +50,9 @@ public class Bouquet {
     // this is done so users can add and or remove flowers for further
     // customization of their bouquet
     public void addPopBouquetOne() {
+        PopularBouquets popularBouquets = new PopularBouquets();
+        Bouquet popBouquetOne = popularBouquets.setPopularBouquetOne();
+        flowerNames.addAll(popBouquetOne.getBouquetRequirements());
     }
 
     // EFFECTS: add the requirement of PopularBouquetTwo from PopularBouquets class
@@ -57,6 +60,9 @@ public class Bouquet {
     // this is done so users can add and or remove flowers for further
     // customization of their bouquet
     public void addPopBouquetTwo() {
+        PopularBouquets popularBouquets = new PopularBouquets();
+        Bouquet popBouquetTwo = popularBouquets.setPopularBouquetTwo();
+        flowerNames.addAll(popBouquetTwo.getBouquetRequirements());
     }
 
     // EFFECTS: add the requirement of PopularBouquetThree from PopularBouquets
@@ -65,5 +71,8 @@ public class Bouquet {
     // this is done so users can add and or remove flowers for further
     // customization of their bouquet
     public void addPopBouquetThree() {
+        PopularBouquets popularBouquets = new PopularBouquets();
+        Bouquet popBouquetThree = popularBouquets.setPopularBouquetThree();
+        flowerNames.addAll(popBouquetThree.getBouquetRequirements());
     }
 }
