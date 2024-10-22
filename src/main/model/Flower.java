@@ -6,17 +6,17 @@ public class Flower {
 
     // EFFECTS: input of flowerName is set to flowerName for this Flower
     public Flower(String flowerName) {
-        //stub
+        this.flowerName = flowerName;
     }
 
     public String getFlowerName() {
-        return ""; //stub
+        return flowerName;
     }
 
     // EFFECTS: returns a string representation of Flower
     // code source from TellerApp (with exceptions)
     @Override
     public String toString() {
-        return ""; //stub
+        return flowerName;
     }
 }
