@@ -8,135 +8,109 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TestBouquet {
-    
+
     private Bouquet testBouquet;
-    
+    private Flower testFlower1;
+    private Flower testFlower2;
+    private Flower testFlower3;
+
     @BeforeEach
     void runBefore() {
-        testBouquet = new Bouquet("Mary", 0);
+        testBouquet = new Bouquet("Mary", new ArrayList<>(), 0);
+        testFlower1 = new Flower("Rose");
+        testFlower2 = new Flower("Sunflower");
+        testFlower3 = new Flower("Wisteria");
     }
 
     @Test
     void testConstructor() {
         assertEquals("Mary", testBouquet.getName());
         assertEquals(0, testBouquet.getPrice());
+        assertEquals(new ArrayList<>(), testBouquet.getBouquetRequirements());
     }
 
     @Test
     void testAddSingleFlower() {
-        testBouquet.flowerAdd("Rose");
-        ArrayList<String> flowerName = testBouquet.bouquetRequirements();
-        assertEquals("Rose", flowerName.get(0));
-        assertEquals(1, flowerName.size());
+        testBouquet.flowerAdd(testFlower1);
+        assertEquals("Rose", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals(1, testBouquet.getBouquetRequirements().size());
     }
 
     @Test
     void testAddMutipleFlowers() {
-        testBouquet.flowerAdd("Sunflower");
-        testBouquet.flowerAdd("Wisteria");
-        ArrayList<String> flowerName = testBouquet.bouquetRequirements();
-        assertEquals("Sunflower", flowerName.get(0));
-        assertEquals("Wisteria", flowerName.get(1));
-        assertEquals(2, flowerName.size());
+        testBouquet.flowerAdd(testFlower2);
+        testBouquet.flowerAdd(testFlower3);
+        assertEquals("Sunflower", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals("Wisteria", testBouquet.getBouquetRequirements().get(1).toString());
+        assertEquals(2, testBouquet.getBouquetRequirements().size());
     }
 
     @Test
     void testAddNoFlowers() {
-        ArrayList<String> flowerName = testBouquet.bouquetRequirements();
-        assertTrue(flowerName.isEmpty());
+        assertTrue(testBouquet.getBouquetRequirements().isEmpty());
     }
 
     @Test
     void testRemoveOneFlower() {
-        testBouquet.flowerAdd("Tulip");
-        ArrayList<String> flowerName = testBouquet.bouquetRequirements();
-        assertEquals("Tulip", flowerName.get(0));
-        assertEquals(1, flowerName.size());
-        testBouquet.flowerRemove("Tulip");
-        assertEquals(0, flowerName.size());
+        testBouquet.flowerAdd(testFlower1);
+        assertEquals("Rose", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals(1, testBouquet.getBouquetRequirements().size());
+        testBouquet.flowerRemove(testFlower1);
+        assertEquals(0, testBouquet.getBouquetRequirements().size());
     }
 
     @Test
     void testRemoveMultipleFlowers() {
-        testBouquet.flowerAdd("Daisy");
-        testBouquet.flowerAdd("Lavender");
-        testBouquet.flowerAdd("Lilac");
-        ArrayList<String> flowerName = testBouquet.bouquetRequirements();
-        assertEquals("Daisy", flowerName.get(0));
-        assertEquals("Lavender", flowerName.get(1));
-        assertEquals("Lilac", flowerName.get(2));
-        assertEquals(3, flowerName.size());
-        testBouquet.flowerRemove("Lavender");
-        assertEquals("Daisy", flowerName.get(0));
-        assertEquals("Lilac", flowerName.get(1));
-        assertEquals(2, flowerName.size());
-        testBouquet.flowerRemove("Daisy");
-        assertEquals("Lilac", flowerName.get(0));
-        assertEquals(1, flowerName.size());
+        testBouquet.flowerAdd(testFlower2);
+        testBouquet.flowerAdd(testFlower3);
+        testBouquet.flowerAdd(testFlower1);
+        assertEquals("Sunflower", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals("Wisteria", testBouquet.getBouquetRequirements().get(1).toString());
+        assertEquals("Rose", testBouquet.getBouquetRequirements().get(2).toString());
+        assertEquals(3, testBouquet.getBouquetRequirements().size());
+        testBouquet.flowerRemove(testFlower3);
+        assertEquals("Sunflower", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals("Rose", testBouquet.getBouquetRequirements().get(1).toString());
+        assertEquals(2, testBouquet.getBouquetRequirements().size());
+        testBouquet.flowerRemove(testFlower2);
+        assertEquals("Rose", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals(1, testBouquet.getBouquetRequirements().size());
     }
 
     @Test
     void testRemoveNonexistentFlower() {
-        testBouquet.flowerAdd("Lily");
-        testBouquet.flowerAdd("Snowdrop");
-        ArrayList<String> flowerName = testBouquet.bouquetRequirements();
-        assertEquals("Lily", flowerName.get(0));
-        assertEquals("Snowdrop", flowerName.get(1));
-        assertEquals(2, flowerName.size());
-        testBouquet.flowerRemove("Rose");
-        assertEquals("Lily", flowerName.get(0));
-        assertEquals("Snowdrop", flowerName.get(1));
-        assertEquals(2, flowerName.size());
+        testBouquet.flowerAdd(testFlower1);
+        testBouquet.flowerAdd(testFlower2);
+        assertEquals("Rose", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals("Sunflower", testBouquet.getBouquetRequirements().get(1).toString());
+        assertEquals(2, testBouquet.getBouquetRequirements().size());
+        testBouquet.flowerRemove(testFlower3);
+        assertEquals("Rose", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals("Sunflower", testBouquet.getBouquetRequirements().get(1).toString());
+        assertEquals(2, testBouquet.getBouquetRequirements().size());
     }
 
     @Test
-    void testPopBouquetOne() {
-        testBouquet.popularBouquetOne();
-        ArrayList<String> flowerName = testBouquet.bouquetRequirements();
-        assertEquals("Rose", flowerName.get(0));
-        assertEquals("Rose", flowerName.get(6));
-        assertEquals("Rose", flowerName.get(11));
-        assertEquals("Greens", flowerName.get(12));
-        assertEquals(13, flowerName.size());
+    void testSetPopBouquetOne() {
+        testBouquet.addPopBouquetOne();
+        assertEquals("Rose", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals("Greens", testBouquet.getBouquetRequirements().get(12).toString());
+        assertEquals(13, testBouquet.getBouquetRequirements().size());
     }
 
     @Test
-    void testPopBouquetTwo() {
-        testBouquet.popularBouquetTwo();
-        ArrayList<String> flowerName = testBouquet.bouquetRequirements();
-        assertEquals("Sunflower", flowerName.get(0));
-        assertEquals("Daisy", flowerName.get(1));
-        assertEquals("Lily", flowerName.get(2));
-        assertEquals("Snowdrop", flowerName.get(3));
-        assertEquals("Greens", flowerName.get(4));
-        assertEquals("Sunflower", flowerName.get(5));
-        assertEquals("Greens", flowerName.get(9));
-        assertEquals("Sunflower", flowerName.get(10));
-        assertEquals("Greens", flowerName.get(14));
-        assertEquals("Sunflower", flowerName.get(15));
-        assertEquals("Daisy", flowerName.get(16));
-        assertEquals("Daisy", flowerName.get(17));
-        assertEquals(18, flowerName.size());
+    void testSetPopBouquetTwo() {
+        testBouquet.addPopBouquetTwo();
+        assertEquals("Sunflower", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals("Daisy", testBouquet.getBouquetRequirements().get(17).toString());
+        assertEquals(18, testBouquet.getBouquetRequirements().size());
     }
 
     @Test
-    void testPopBouquetThree() {
-        testBouquet.popularBouquetThree();
-        ArrayList<String> flowerName = testBouquet.bouquetRequirements();
-        assertEquals("Tulip", flowerName.get(0));
-        assertEquals("Lavender", flowerName.get(1));
-        assertEquals("Lilac", flowerName.get(2));
-        assertEquals("Dahlias", flowerName.get(3));
-        assertEquals("Bellflower", flowerName.get(4));
-        assertEquals("Rosemary", flowerName.get(5));
-        assertEquals("Tulip", flowerName.get(6));
-        assertEquals("Rosemary", flowerName.get(11));
-        assertEquals("Tulip", flowerName.get(12));
-        assertEquals("Rosemary", flowerName.get(17));
-        assertEquals("Tulip", flowerName.get(18));
-        assertEquals("Lavender", flowerName.get(19));
-        assertEquals("Greens", flowerName.get(20));
-        assertEquals("Greens", flowerName.get(21));
-        assertEquals(22, flowerName.size());
+    void testSetPopBouquetThree() {
+        testBouquet.addPopBouquetThree();
+        assertEquals("Tulip", testBouquet.getBouquetRequirements().get(0).toString());
+        assertEquals("Greens", testBouquet.getBouquetRequirements().get(21).toString());
+        assertEquals(22, testBouquet.getBouquetRequirements().size());
     }
 }
