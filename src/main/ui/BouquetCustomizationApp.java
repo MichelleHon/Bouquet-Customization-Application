@@ -1,13 +1,16 @@
 package ui;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import model.Bouquet;
+import model.Flower;
 
 // Bouquet customization applicaation
 public class BouquetCustomizationApp {
     private Scanner scanner;
-    private Bouquet bouquet = new Bouquet(null, 0);
+    private Bouquet bouquet = new Bouquet(null, new ArrayList<>(), 0);
 
     // EFFECTS: runs the customization application
     public BouquetCustomizationApp() {
@@ -35,8 +38,8 @@ public class BouquetCustomizationApp {
             } else if (input.equals("r")) {
                 removeFlower();
             } else if (input.equals("v")) {
-                bouquet.bouquetRequirements();
-                System.out.println(bouquet.bouquetRequirements());
+                bouquet.getBouquetRequirements();
+                System.out.println(bouquet.getBouquetRequirements());
             } else if (input.equals("s")) {
                 popularBouquets();
             } else {
@@ -62,7 +65,8 @@ public class BouquetCustomizationApp {
     private void addFlower() {
         System.out.println("Enter a flower to add to the bouquet: ");
         String flowerInput = scanner.next();
-        bouquet.flowerAdd(flowerInput);
+        Flower addFlower = new Flower(flowerInput);
+        bouquet.flowerAdd(addFlower);
     }
 
     // MODIFIES: this
@@ -73,10 +77,18 @@ public class BouquetCustomizationApp {
     private void removeFlower() {
         System.out.println("Enter a flower to remove from the bouquet: ");
         String flowerInput = scanner.next();
-        bouquet.flowerRemove(flowerInput);
-        if (bouquet.bouquetRequirements().contains(flowerInput)) {
-            bouquet.flowerRemove(flowerInput);
-        } else {
+        Iterator<Flower> iterator = bouquet.getBouquetRequirements().iterator();
+        boolean flowerFound = false;
+
+        while (iterator.hasNext()) {
+            Flower currentFlower = iterator.next();
+            if (currentFlower.getFlowerName().equalsIgnoreCase(flowerInput)) {
+                bouquet.flowerRemove(currentFlower);
+                flowerFound = true;
+                break;
+            }
+        }
+        if (!flowerFound) {
             System.out.println("Flower not in bouquet");
         }
     }
@@ -89,11 +101,11 @@ public class BouquetCustomizationApp {
         String popInput = scanner.next();
 
         if (popInput.equals("1")) {
-            bouquet.popularBouquetOne();
+            bouquet.addPopBouquetOne();
         } else if (popInput.equals("2")) {
-            bouquet.popularBouquetTwo();
+            bouquet.addPopBouquetTwo();
         } else if (popInput.equals("3")) {
-            bouquet.popularBouquetThree();
+            bouquet.addPopBouquetThree();
         } else {
             System.out.println("Selection invalid");
         }
