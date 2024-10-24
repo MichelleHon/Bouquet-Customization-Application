@@ -1,0 +1,8 @@
+{
+    "flowers": [
+        {"flowerName": "rose"},
+        {"flowerName": "lily"}
+    ],
+    "price": 0,
+    "CusName": "Customer1"
+}
