@@ -15,3 +15,5 @@
 - As a user, I want to be able to *view* the list of requirements for my bouquet.
 - As a user, I want to be able to *remove* a flower from my bouquet.
 - As a user, I want to be able to *select* from popular bouquets and *add* a greenery for the bouquet of choice.
+- As a user, I want to be given the option to *load* my bouquet from file when starting the application.
+- As a user, I want to be given the option to *save* my bouquet to file when quitting the application.
