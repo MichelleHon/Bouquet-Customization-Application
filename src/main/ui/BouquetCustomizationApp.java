@@ -80,6 +80,7 @@ public class BouquetCustomizationApp {
         System.out.println("\tv -> view bouquet requirements");
         System.out.println("\ts -> select from popular bouquets");
         System.out.println("\tsv -> save bouquet to file");
+        System.out.println("\tl -> load bouquet from file");
         System.out.println("\tq -> quit");
     }
 
@@ -154,5 +155,12 @@ public class BouquetCustomizationApp {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + BOUTIQUE);
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    // code source from JsonSerializationDemo
+    private void loadBouquet() {
+        // stub
     }
 }
