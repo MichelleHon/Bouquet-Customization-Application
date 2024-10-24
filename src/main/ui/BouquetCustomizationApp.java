@@ -7,13 +7,20 @@ import java.util.Scanner;
 import model.Bouquet;
 import model.Flower;
 
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 // Bouquet customization applicaation
 public class BouquetCustomizationApp {
     private Scanner scanner;
-    private Bouquet bouquet = new Bouquet(null, new ArrayList<>(), 0);
+    private Bouquet bouquet;
 
     // EFFECTS: runs the customization application
-    public BouquetCustomizationApp() {
+    public BouquetCustomizationApp() throws FileNotFoundException {
+        bouquet = new Bouquet("Customer1", new ArrayList<>(), 0);
         runCustomization();
     }
 
@@ -33,21 +40,29 @@ public class BouquetCustomizationApp {
 
             if (input.equals("q")) {
                 runCus = false;
-            } else if (input.equals("a")) {
-                addFlower();
-            } else if (input.equals("r")) {
-                removeFlower();
-            } else if (input.equals("v")) {
-                bouquet.getBouquetRequirements();
-                System.out.println(bouquet.getBouquetRequirements());
-            } else if (input.equals("s")) {
-                popularBouquets();
             } else {
-                System.out.println("Selection invalid");
+                processCommand(input);
             }
         }
         System.out.println("Goodbye");
 
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user command
+    private void processCommand(String input) {
+        if (input.equals("a")) {
+            addFlower();
+        } else if (input.equals("r")) {
+            removeFlower();
+        } else if (input.equals("v")) {
+            bouquet.getBouquetRequirements();
+            System.out.println(bouquet.getBouquetRequirements());
+        } else if (input.equals("s")) {
+            popularBouquets();
+        } else {
+            System.out.println("Selection invalid");
+        }
     }
 
     // EFFECTS: displays menu of options to user
@@ -118,5 +133,11 @@ public class BouquetCustomizationApp {
         System.out.println("\t1: Classic Garden Rose($80)");
         System.out.println("\t2: Sunshine Delight($105)");
         System.out.println("\t3: Spring Elegance($130)");
+    }
+
+    // EFFECTS: saves the Bouquet to file
+    // code source from JsonSerializationDemo
+    private void saveBouquet() {
+        //stub
     }
 }
