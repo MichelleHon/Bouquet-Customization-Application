@@ -28,6 +28,8 @@ public class Flower implements Writable {
     // code source from JsonSerializationDemo
     @Override
     public JSONObject toJson() {
-        return new JSONObject(); //stub
+        JSONObject json = new JSONObject();
+        json.put("flowerName", flowerName);
+        return json;
     }
 }

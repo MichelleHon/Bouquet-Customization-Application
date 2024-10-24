@@ -85,12 +85,20 @@ public class Bouquet implements Writable {
     // code source from JsonSerializationDemo
     @Override
     public JSONObject toJson() {
-        return new JSONObject(); //stub
+        JSONObject json = new JSONObject();
+        json.put("CusName", name);
+        json.put("flowers", flowersToJson());
+        json.put("price", price);
+        return json;
     }
 
     // EFFECTS: returns flowers in this bouquet as a JSON array
     // code source from JsonSerializationDemo
     private JSONArray flowersToJson() {
-        return new JSONArray(); //stub
+        JSONArray jsonArray = new JSONArray();
+        for (Flower f : flowerNames) {
+            jsonArray.put(f.toJson());
+        }
+        return jsonArray;
     }
 }
