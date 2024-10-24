@@ -67,6 +67,8 @@ public class BouquetCustomizationApp {
             popularBouquets();
         } else if (input.equals("sv")) {
             saveBouquet();
+        } else if (input.equals("l")) {
+            loadBouquet();
         } else {
             System.out.println("Selection invalid");
         }
@@ -144,7 +146,7 @@ public class BouquetCustomizationApp {
         System.out.println("\t3: Spring Elegance($130)");
     }
 
-    // EFFECTS: saves the Bouquet to file
+    // EFFECTS: saves the workroom to file
     // code source from JsonSerializationDemo
     private void saveBouquet() {
         try {
@@ -161,6 +163,11 @@ public class BouquetCustomizationApp {
     // EFFECTS: loads workroom from file
     // code source from JsonSerializationDemo
     private void loadBouquet() {
-        // stub
+        try {
+            bouquet = jsonReader.read();
+            System.out.println("Loaded " + bouquet.getName() + " from " + BOUTIQUE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + BOUTIQUE);
+        }
     }
 }
