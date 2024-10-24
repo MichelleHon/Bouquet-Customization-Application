@@ -17,10 +17,15 @@ import java.io.IOException;
 public class BouquetCustomizationApp {
     private Scanner scanner;
     private Bouquet bouquet;
+    private static final String BOUTIQUE = "./data/boutique.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the customization application
     public BouquetCustomizationApp() throws FileNotFoundException {
         bouquet = new Bouquet("Customer1", new ArrayList<>(), 0);
+        jsonWriter = new JsonWriter(BOUTIQUE);
+        jsonReader = new JsonReader(BOUTIQUE);
         runCustomization();
     }
 
@@ -60,6 +65,8 @@ public class BouquetCustomizationApp {
             System.out.println(bouquet.getBouquetRequirements());
         } else if (input.equals("s")) {
             popularBouquets();
+        } else if (input.equals("sv")) {
+            saveBouquet();
         } else {
             System.out.println("Selection invalid");
         }
@@ -72,6 +79,7 @@ public class BouquetCustomizationApp {
         System.out.println("\tr -> remove flower");
         System.out.println("\tv -> view bouquet requirements");
         System.out.println("\ts -> select from popular bouquets");
+        System.out.println("\tsv -> save bouquet to file");
         System.out.println("\tq -> quit");
     }
 
@@ -138,6 +146,13 @@ public class BouquetCustomizationApp {
     // EFFECTS: saves the Bouquet to file
     // code source from JsonSerializationDemo
     private void saveBouquet() {
-        //stub
+        try {
+            jsonWriter.open();
+            jsonWriter.write(bouquet);
+            jsonWriter.close();
+            System.out.println("Saved " + bouquet.getName() + " to " + BOUTIQUE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + BOUTIQUE);
+        }
     }
 }
