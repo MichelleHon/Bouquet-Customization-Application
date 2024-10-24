@@ -2,16 +2,21 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a bouquet having a customer name, the list of requirements and the price (in dollars)
-public class Bouquet {
+public class Bouquet implements Writable {
     private String name; // customer name
-    private double price; // current price of bouquet
+    private int price; // current price of bouquet
     private ArrayList<Flower> flowerNames; // list of flower names for bouquet requirements
 
     // EFFECTS: name is set to customerName, input of flowerNames is set to
     // flowerNames for this Bouquet
     // and price is set to zero
-    public Bouquet(String customerName, ArrayList<Flower> flowerNames, double bouquetPrice) {
+    public Bouquet(String customerName, ArrayList<Flower> flowerNames, int bouquetPrice) {
         this.name = customerName;
         this.price = bouquetPrice;
         this.flowerNames = flowerNames;
@@ -74,5 +79,18 @@ public class Bouquet {
         PopularBouquets popularBouquets = new PopularBouquets();
         Bouquet popBouquetThree = popularBouquets.setPopularBouquetThree();
         flowerNames.addAll(popBouquetThree.getBouquetRequirements());
+    }
+
+    // EFFECTS: returns this bouquet as a JSON object
+    // code source from JsonSerializationDemo
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject(); //stub
+    }
+
+    // EFFECTS: returns flowers in this bouquet as a JSON array
+    // code source from JsonSerializationDemo
+    private JSONArray flowersToJson() {
+        return new JSONArray(); //stub
     }
 }

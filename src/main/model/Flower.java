@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a flower or greenary that would be added to the bouquet
-public class Flower {
+public class Flower implements Writable {
     private String flowerName; // flower name
 
     // EFFECTS: input of flowerName is set to flowerName for this Flower
@@ -18,5 +22,12 @@ public class Flower {
     @Override
     public String toString() {
         return flowerName;
+    }
+
+    // EFFECTS: returns this flower as a JSON object
+    // code source from JsonSerializationDemo
+    @Override
+    public JSONObject toJson() {
+        return new JSONObject(); //stub
     }
 }
