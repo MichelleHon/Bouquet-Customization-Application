@@ -61,26 +61,26 @@ public class BouquetCustomizationAppGUI extends JFrame {
     }
 
     // REQUIRES: flower != null
-    // EFFECTS: returns a button that allows users to add a flower to their bouquet requirements list when pressed
+    // EFFECTS: returns a button that directs users to the add flower panel when pressed
     private JButton addFlowerBtn(FlowerUI flower) {
         JButton stubButton = new JButton();
         return stubButton; //stub
     }
 
     // REQUIRES: flower != null
-    // EFFECTS: returns a button that allows users to remove a flower from their bouquet requirements list when pressed
+    // EFFECTS: returns a button that directs users to the remove flower panel when pressed
     private JButton removeFlowerBtn(FlowerUI flower) {
         JButton stubButton = new JButton();
         return stubButton; //stub
     }
 
-    // EFFECTS: returns a button that allows users to remove a flower from their bouquet requirements list when pressed
+    // EFFECTS: returns a button that directs users to the view bouquet requirements list panel when pressed
     private JButton viewBouquetBtn() {
         JButton stubButton = new JButton();
         return stubButton; //stub
     }
-    
-    // EFFECTS: returns a button that allows users to choose popular bouquets to add to their bouquet requirements list when pressed
+
+    // EFFECTS: returns a button that directs users to the popular bouquets panel when pressed
     private JButton popularBouquetsBtn() {
         JButton stubButton = new JButton();
         return stubButton; //stub
@@ -92,7 +92,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
         return stubButton; //stub
     }
 
-    // EFFECTS: returns a button that saves the users bouquet requirements list to file and then closes the application when pressed
+    // EFFECTS: returns a button that saves the users bouquet requirements list to file 
+    //          and then closes the application when pressed
     private JButton saveBtn() {
         JButton stubButton = new JButton();
         return stubButton; //stub
@@ -145,13 +146,15 @@ public class BouquetCustomizationAppGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up a quit application panel and adds save and quit buttons and a sample bouquet photo with description
+    // EFFECTS: sets up a quit application panel and adds save and quit buttons 
+    //          and a sample bouquet photo with description
     private void quitScreen() {
         //stub
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up the photo with description in a container to be added to the quit application screen
+    // EFFECTS: sets up a quit application panel and adds save and quit buttons 
+    //          and a sample bouquet photo with description
     private JPanel endPhoto() {
         JPanel stubPanel = new JPanel();
         return stubPanel; //stub
