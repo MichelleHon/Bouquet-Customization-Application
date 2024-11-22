@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 
 import model.Bouquet;
 
-// Bouquet customization application's add and remove window frame
+// Bouquet customization application's viewing bouquet requirements list frame
 public class BouquetUI extends JFrame {
 
-    // EFFECTS: returns a button that saves the users bouquet requirements list to file 
-    //          and then closes the application when pressed
+    // EFFECTS: returns a button that contains the given text, changes color when mouse hovers over
+    //          and performs the given action when pressed
     private JButton hover(String text, Color color, Color hover, ActionListener e) {
         JButton stubButton = new JButton();
         return stubButton; //stub
