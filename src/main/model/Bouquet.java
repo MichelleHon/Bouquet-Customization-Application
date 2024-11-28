@@ -34,12 +34,14 @@ public class Bouquet implements Writable {
     // EFFECTS: adds a flower to the collection of requirements for the bouquet
     public void flowerAdd(Flower flower) {
         flowerNames.add(flower);
+        EventLog.getInstance().logEvent(new Event("Flower added to bouquet requirements list: " + flower));
     }
 
     // MOFIDIES: this
     // EFFECTS: removes a flower from the collection of requirements for the bouquet
     public void flowerRemove(Flower flower) {
         flowerNames.remove(flower);
+        EventLog.getInstance().logEvent(new Event("Flower removed from bouquet requirements list: " + flower));
 
     }
 
@@ -58,6 +60,7 @@ public class Bouquet implements Writable {
         PopularBouquets popularBouquets = new PopularBouquets();
         Bouquet popBouquetOne = popularBouquets.setPopularBouquetOne();
         flowerNames.addAll(popBouquetOne.getBouquetRequirements());
+        EventLog.getInstance().logEvent(new Event("Popular bouquet one added to bouquet requirements list."));
     }
 
     // EFFECTS: add the requirement of PopularBouquetTwo from PopularBouquets class
@@ -68,6 +71,7 @@ public class Bouquet implements Writable {
         PopularBouquets popularBouquets = new PopularBouquets();
         Bouquet popBouquetTwo = popularBouquets.setPopularBouquetTwo();
         flowerNames.addAll(popBouquetTwo.getBouquetRequirements());
+        EventLog.getInstance().logEvent(new Event("Popular bouquet two added to bouquet requirements list."));
     }
 
     // EFFECTS: add the requirement of PopularBouquetThree from PopularBouquets
@@ -79,6 +83,7 @@ public class Bouquet implements Writable {
         PopularBouquets popularBouquets = new PopularBouquets();
         Bouquet popBouquetThree = popularBouquets.setPopularBouquetThree();
         flowerNames.addAll(popBouquetThree.getBouquetRequirements());
+        EventLog.getInstance().logEvent(new Event("Popular bouquet three added to bouquet requirements list."));
     }
 
     // EFFECTS: returns this bouquet as a JSON object
@@ -106,6 +111,10 @@ public class Bouquet implements Writable {
     // EFFECTS: removes all flowers from the collection of requirements for the
     // bouquet
     public void removeAllFlowers(ArrayList<Flower> flowerNames) {
-        //stub
+        while (!flowerNames.isEmpty()) {
+            getBouquetRequirements().remove(0);
+        }
+        EventLog.getInstance().logEvent(new Event("All flowers have been removed from bouquet requirements list."));
+
     }
 }
