@@ -101,4 +101,11 @@ public class Bouquet implements Writable {
         }
         return jsonArray;
     }
+
+    // MOFIDIES: this
+    // EFFECTS: removes all flowers from the collection of requirements for the
+    // bouquet
+    public void removeAllFlowers(ArrayList<Flower> flowerNames) {
+        //stub
+    }
 }
