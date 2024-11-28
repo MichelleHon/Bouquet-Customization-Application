@@ -3,7 +3,8 @@ package ui;
 import java.util.ArrayList;
 
 import model.Bouquet;
-
+import model.EventLog;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -24,6 +25,7 @@ public class BouquetCustomizationAppGUI extends JFrame {
     private static final String BOUTIQUE = "./data/boutique.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    private EventLog eventLog;
 
     private JPanel mainPanel;
     private CardLayout cardLayout;
@@ -61,7 +63,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
         return cardLayout;
     }
 
-    // EFFECTS: returns a message that contains the given text and uses the given font size
+    // EFFECTS: returns a message that contains the given text and uses the given
+    // font size
     private JLabel status(String text, int fontSize) {
         JLabel statusLabel = new JLabel(text, JLabel.CENTER);
         statusLabel.setFont(new Font("Sans-serif", Font.PLAIN, fontSize));
@@ -69,7 +72,7 @@ public class BouquetCustomizationAppGUI extends JFrame {
         return statusLabel;
     }
 
-    // EFFECTS: returns a thank you message  
+    // EFFECTS: returns a thank you message
     private JLabel thank() {
         JLabel thank = new JLabel("Thank you for using the Bouquet Customization Application", JLabel.CENTER);
         thank.setFont(new Font("Sans-serif", Font.PLAIN, 20));
@@ -78,8 +81,9 @@ public class BouquetCustomizationAppGUI extends JFrame {
     }
 
     // REQUIRES: action != null
-    // EFFECTS: returns a button that contains the given text, changes color when mouse hovers over
-    //          and performs the given action when pressed
+    // EFFECTS: returns a button that contains the given text, changes color when
+    // mouse hovers over
+    // and performs the given action when pressed
     private JButton hover(String text, Color color, Color hover, ActionListener e) {
         JButton button = new JButton(text);
         button.setBackground(color);
@@ -98,7 +102,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
         return button;
     }
 
-    // EFFECTS: returns a button that allows users to load a previously saved bouquet when pressed
+    // EFFECTS: returns a button that allows users to load a previously saved
+    // bouquet when pressed
     private JButton loadBtn() {
         return hover(
                 "Load previously saved bouquet",
@@ -107,7 +112,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
                 e -> loadBouquet());
     }
 
-    // EFFECTS: returns a button that allows users to create a new bouquet when pressed
+    // EFFECTS: returns a button that allows users to create a new bouquet when
+    // pressed
     private JButton newBtn() {
         return hover(
                 "Create new bouquet",
@@ -116,7 +122,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
                 e -> cardLayout.show(mainPanel, "menu"));
     }
 
-    // EFFECTS: returns a button that allows users to proceed to the menu screen when pressed
+    // EFFECTS: returns a button that allows users to proceed to the menu screen
+    // when pressed
     private JButton continueBtn() {
         return hover(
                 "Continue to menu",
@@ -125,7 +132,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
                 e -> cardLayout.show(mainPanel, "menu"));
     }
 
-    // EFFECTS: returns a button that allows users to return to the menu screen when pressed
+    // EFFECTS: returns a button that allows users to return to the menu screen when
+    // pressed
     private JButton returnBtn() {
         return hover(
                 "Return to menu",
@@ -135,7 +143,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
     }
 
     // REQUIRES: flower != null
-    // EFFECTS: returns a button that directs users to the add flower panel when pressed
+    // EFFECTS: returns a button that directs users to the add flower panel when
+    // pressed
     private JButton addFlowerBtn(FlowerUI flower) {
         return hover(
                 "Add a flower",
@@ -149,7 +158,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
     }
 
     // REQUIRES: flower != null
-    // EFFECTS: returns a button that directs users to the remove flower panel when pressed
+    // EFFECTS: returns a button that directs users to the remove flower panel when
+    // pressed
     private JButton removeFlowerBtn(FlowerUI flower) {
         return hover(
                 "Remove a flower",
@@ -162,7 +172,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
                 });
     }
 
-    // EFFECTS: returns a button that directs users to the view bouquet requirements list panel when pressed
+    // EFFECTS: returns a button that directs users to the view bouquet requirements
+    // list panel when pressed
     private JButton viewBouquetBtn() {
         return hover(
                 "View bouquet requirements",
@@ -175,8 +186,9 @@ public class BouquetCustomizationAppGUI extends JFrame {
                     cardLayout.show(mainPanel, "view");
                 });
     }
-    
-    // EFFECTS: returns a button that directs users to the popular bouquets panel when pressed
+
+    // EFFECTS: returns a button that directs users to the popular bouquets panel
+    // when pressed
     private JButton popularBouquetsBtn() {
         return hover(
                 "Select from popular bouquets",
@@ -190,7 +202,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
                 });
     }
 
-    // EFFECTS: returns a button that brings users to the saving bouquet screen when pressed
+    // EFFECTS: returns a button that brings users to the saving bouquet screen when
+    // pressed
     private JButton quitAppBtn() {
         return hover(
                 "Quit application",
@@ -199,8 +212,9 @@ public class BouquetCustomizationAppGUI extends JFrame {
                 e -> quitScreen());
     }
 
-    // EFFECTS: returns a button that saves the users bouquet requirements list to file 
-    //          and then closes the application when pressed
+    // EFFECTS: returns a button that saves the users bouquet requirements list to
+    // file
+    // and then closes the application when pressed
     private JButton saveBtn() {
         return hover(
                 "Save bouquet and quit",
@@ -209,6 +223,12 @@ public class BouquetCustomizationAppGUI extends JFrame {
                 e -> {
                     saveBouquet();
                     Timer timer = new Timer(1500, t -> {
+                        eventLog = EventLog.getInstance();
+                        System.out.println("Event Log:");
+                        for (Event event : eventLog) {
+                            System.out.println(event.getDate());
+                            System.out.println(event.getDescription());
+                        }
                         dispose();
                     });
                     timer.setRepeats(false);
@@ -222,11 +242,20 @@ public class BouquetCustomizationAppGUI extends JFrame {
                 "Quit without saving",
                 new Color(208, 240, 192),
                 new Color(233, 255, 219),
-                e -> dispose());
+                e -> {
+                    eventLog = EventLog.getInstance();
+                    System.out.println("Event Log:");
+                    for (Event event : eventLog) {
+                        System.out.println(event.getDate() + "\n");
+                        System.out.println(event.getDescription());
+                    }
+                    dispose();
+                });
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up the home panel and adds a greeting message, load and new bouquet buttons and a gif to the panel
+    // EFFECTS: sets up the home panel and adds a greeting message, load and new
+    // bouquet buttons and a gif to the panel
     private JPanel homeScreen() {
         JPanel homeScreen = new JPanel(new BorderLayout());
         homeScreen.setBackground(new Color(250, 240, 230));
@@ -267,7 +296,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up a menu panel and adds a call to action message and the actions button panel
+    // EFFECTS: sets up a menu panel and adds a call to action message and the
+    // actions button panel
     private JPanel runCustomization() {
         JPanel menuScreen = new JPanel(new BorderLayout());
         menuScreen.setBackground(new Color(250, 240, 230));
@@ -282,7 +312,7 @@ public class BouquetCustomizationAppGUI extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: sets up a actions button panel and adds five buttons:
-    //          addFlowerBtn, removeFlowerBtn, viewBouquetBtn, popularBouquetsBtn, quitAppBtn
+    // addFlowerBtn, removeFlowerBtn, viewBouquetBtn, popularBouquetsBtn, quitAppBtn
     private JPanel buttonPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -304,7 +334,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file and displays a status message about the loading state
+    // EFFECTS: loads workroom from file and displays a status message about the
+    // loading state
     private void loadBouquet() {
         JPanel statusPanel = new JPanel(new BorderLayout());
         statusLabel = status("", 16);
@@ -330,7 +361,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
         cardLayout.show(mainPanel, "status");
     }
 
-    // EFFECTS: saves the workroom to file and displays a status message about the loading state
+    // EFFECTS: saves the workroom to file and displays a status message about the
+    // loading state
     private void saveBouquet() {
         try {
             jsonWriter.open();
@@ -345,8 +377,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up a quit application panel and adds save and quit buttons 
-    //          and a sample bouquet photo with description
+    // EFFECTS: sets up a quit application panel and adds save and quit buttons
+    // and a sample bouquet photo with description
     private void quitScreen() {
         JPanel quitPanel = new JPanel();
         quitPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -377,7 +409,8 @@ public class BouquetCustomizationAppGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up the photo with description in a container to be added to the quit application screen
+    // EFFECTS: sets up the photo with description in a container to be added to the
+    // quit application screen
     private JPanel endPhoto() {
         JPanel photo = new JPanel();
         photo.setLayout(new BoxLayout(photo, BoxLayout.Y_AXIS));
