@@ -26,3 +26,26 @@
 - You can locate my visual component by running the application, the first visual is on the first panel and the second visual is on the saving panel after pressing the "Quit application" button.
 - You can *save* the state of my application by pressing the "Save bouquet and quit" button which could be found after pressing the "Quit application" button.
 - You can *reload* the state of my application by pressing the "Load previously saved bouquet" button which could be found on the first panel.
+
+## Phase 4: Task 2
+```
+Event Log:
+
+Mon Nov 25 21:12:25 PST 2024
+Popular bouquet two added to bouquet requirements list.
+
+Mon Nov 25 21:12:29 PST 2024
+Flower added to bouquet requirements list: Tulip
+
+Mon Nov 25 21:12:32 PST 2024
+Flower added to bouquet requirements list: Daisy
+
+Mon Nov 25 21:12:37 PST 2024
+Flower removed from bouquet requirements list: Tulip
+
+Mon Nov 25 21:12:40 PST 2024
+All flowers have been removed from bouquet requirements list.
+
+Mon Nov 25 21:12:45 PST 2024
+Flower added to bouquet requirements list: Lily
+```
