@@ -113,4 +113,18 @@ public class TestBouquet {
         assertEquals("Greens", testBouquet.getBouquetRequirements().get(21).toString());
         assertEquals(22, testBouquet.getBouquetRequirements().size());
     }
+
+    @Test
+    void testRemoveAllFlowers() {
+        testBouquet.flowerAdd(testFlower1);
+        testBouquet.flowerAdd(testFlower2);
+        testBouquet.flowerAdd(testFlower3);
+        ArrayList<Flower> flowerList = testBouquet.getBouquetRequirements();
+        assertEquals("Rose", flowerList.get(0).toString());
+        assertEquals("Sunflower", flowerList.get(1).toString());
+        assertEquals("Wisteria", flowerList.get(2).toString());
+        assertEquals(3, flowerList.size());
+        testBouquet.removeAllFlowers(flowerList);
+        assertEquals(0, flowerList.size());
+    }
 }
