@@ -49,3 +49,10 @@ All flowers have been removed from bouquet requirements list.
 Mon Nov 25 21:12:45 PST 2024
 Flower added to bouquet requirements list: Lily
 ```
+
+## Phase 4: Task 3
+If I had more time to work on the project, I would refactor duplicate code. 
+
+Looking at my UML design diagram, I can see that all four of my GUI classes have a lack of relationships and that within the classes there are a couple of duplicate methods such as JLabel status and JButton hover. These methods behave the same way and it is problematic to have code appear multiple times across classes because changing the behavior of a method in one class requires a change to the behavior of the same method in other classes which I might forget to do so, ultimately breaking  functionality of program over time. 
+
+To elimiate duplication, I could create an abstract class called MainGUI which contains the duplicate methods and have the other GUI classes extend this abstract class to avoid redundant code and lead to a more cleaner and readable code. 
