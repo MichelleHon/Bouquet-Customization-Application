@@ -15,8 +15,9 @@ import model.Flower;
 public class BouquetUI extends JFrame {
     private JLabel statusLabel;
 
-    // EFFECTS: returns a button that contains the given text, changes color when mouse hovers over
-    //          and performs the given action when pressed
+    // EFFECTS: returns a button that contains the given text, changes color when
+    // mouse hovers over
+    // and performs the given action when pressed
     private JButton hover(String text, Color color, Color hover, ActionListener e) {
         JButton button = new JButton(text);
         button.setBackground(color);
@@ -36,7 +37,8 @@ public class BouquetUI extends JFrame {
         return button;
     }
 
-    // EFFECTS: returns a button that allows users to return to the menu screen when pressed
+    // EFFECTS: returns a button that allows users to return to the menu screen when
+    // pressed
     private JButton returnBtn(BouquetCustomizationAppGUI mainPanel) {
         return hover(
                 "Return to menu",
@@ -45,7 +47,8 @@ public class BouquetUI extends JFrame {
                 e -> mainPanel.getCardLayout().show(mainPanel.getMainPanel(), "menu"));
     }
 
-    // EFFECTS: returns a button that allows users to remove all flowers from their bouquet list when pressed
+    // EFFECTS: returns a button that allows users to remove all flowers from their
+    // bouquet list when pressed
     private JButton clearAllBtn(BouquetCustomizationAppGUI mainPanel, Bouquet bouquet) {
         return hover(
                 "Clear all flowers",
@@ -58,9 +61,7 @@ public class BouquetUI extends JFrame {
                             JOptionPane.YES_NO_OPTION);
 
                     if (confirm == JOptionPane.YES_OPTION) {
-                        while (!bouquet.getBouquetRequirements().isEmpty()) {
-                            bouquet.getBouquetRequirements().remove(0);
-                        }
+                        bouquet.removeAllFlowers(bouquet.getBouquetRequirements());
                         statusLabel.setText("All flowers have been removed");
                     }
                 });
@@ -73,7 +74,8 @@ public class BouquetUI extends JFrame {
         return viewFlowerPrompt;
     }
 
-    // EFFECTS: returns a message that contains the given text and uses the given font size
+    // EFFECTS: returns a message that contains the given text and uses the given
+    // font size
     private JLabel status(String text, int fontSize) {
         JLabel statusLabel = new JLabel(text, JLabel.CENTER);
         statusLabel.setFont(new Font("Sans-serif", Font.PLAIN, fontSize));
@@ -81,7 +83,8 @@ public class BouquetUI extends JFrame {
         return statusLabel;
     }
 
-    // EFFECTS: sets up a text area that displays the list of flowers in users bouquet requirements list
+    // EFFECTS: sets up a text area that displays the list of flowers in users
+    // bouquet requirements list
     private JTextArea bouquetContents() {
         JTextArea bouquetContents = new JTextArea(10, 20);
         bouquetContents.setEditable(false);
@@ -100,8 +103,9 @@ public class BouquetUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up view flowers in users bouquet requirements list panel 
-    //          and adds a status label, text area, scroll panel and a clear all flowers from list button
+    // EFFECTS: sets up view flowers in users bouquet requirements list panel
+    // and adds a status label, text area, scroll panel and a clear all flowers from
+    // list button
     public JPanel viewBouquet(BouquetCustomizationAppGUI mainPanel, Bouquet bouquet) {
         JPanel viewFlowersPanel = new JPanel();
         viewFlowersPanel.setLayout(new BoxLayout(viewFlowersPanel, BoxLayout.Y_AXIS));
